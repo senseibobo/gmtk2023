@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://v5rec5tea6rr"]
+
+[ext_resource type="Script" path="res://Game.gd" id="1_0w5nu"]
+[ext_resource type="PackedScene" uid="uid://mcdv3twmuodh" path="res://Hero.tscn" id="2_qt7xd"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_0w5nu")
+
+[node name="Moving" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 300.0
+offset_bottom = 100.0
+color = Color(1, 1, 1, 0.301961)
+
+[node name="Hero" parent="." instance=ExtResource("2_qt7xd")]
+position = Vector2(164, 314)
