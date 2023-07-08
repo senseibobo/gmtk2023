@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0tjihxf8r5mj"
-path="res://.godot/imported/platforma.png-16018b972fccbfd46c5650c9c653f3ab.ctex"
+uid="uid://b44meyfrysxrw"
+path="res://.godot/imported/coin_animation.png-47a557bbb53b26d890bb274ee7b96fa8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/world/platforma.png"
-dest_files=["res://.godot/imported/platforma.png-16018b972fccbfd46c5650c9c653f3ab.ctex"]
+source_file="res://game/world/coin_animation.png"
+dest_files=["res://.godot/imported/coin_animation.png-47a557bbb53b26d890bb274ee7b96fa8.ctex"]
 
 [params]
 

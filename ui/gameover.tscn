@@ -1,10 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhwu55r5jpc8n"]
 
 [ext_resource type="Script" path="res://ui/gameover.gd" id="1_r8278"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_4ii4t"]
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="Theme" uid="uid://ipdljmc7o6tf" path="res://ui/miantheme.tres" id="2_ge0x5"]
 
 [node name="gameover" type="CanvasLayer"]
 process_mode = 3
@@ -17,18 +14,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_ge0x5")
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "GAME OVER
-press any button to restart"
-label_settings = SubResource("LabelSettings_4ii4t")
+press R to restart"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Score" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Score: 251204081"
-label_settings = SubResource("LabelSettings_4ii4t")
 horizontal_alignment = 1

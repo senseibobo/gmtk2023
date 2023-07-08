@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dksmof4rrv72l"]
 
-[ext_resource type="Texture2D" uid="uid://c0tjihxf8r5mj" path="res://game/world/platforma.png" id="1_e2fl0"]
+[ext_resource type="Texture2D" uid="uid://c0tjihxf8r5mj" path="res://game/platforms/platforma.png" id="1_xn473"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03avx"]
-size = Vector2(95, 64)
+size = Vector2(127, 40)
 
 [node name="Platform" type="StaticBody2D"]
 
@@ -13,10 +13,10 @@ offset_right = 192.0
 offset_bottom = 24.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(47.5, 16)
+position = Vector2(63.5, 11)
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_03avx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_e2fl0")
+texture = ExtResource("1_xn473")
 centered = false

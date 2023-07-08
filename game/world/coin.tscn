@@ -1,10 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://cea15qj48bcn2"]
+[gd_scene load_steps=11 format=3 uid="uid://cea15qj48bcn2"]
 
 [ext_resource type="Script" path="res://game/world/coin.gd" id="1_bp3mw"]
-[ext_resource type="Texture2D" uid="uid://t5ii6gx3wpr3" path="res://game/world/coin.png" id="2_r5x83"]
+[ext_resource type="Texture2D" uid="uid://b44meyfrysxrw" path="res://game/world/coin_animation.png" id="2_swajr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3et6"]
 radius = 5.49747
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21uwc"]
+atlas = ExtResource("2_swajr")
+region = Rect2(0, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv7ta"]
+atlas = ExtResource("2_swajr")
+region = Rect2(16, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikqns"]
+atlas = ExtResource("2_swajr")
+region = Rect2(32, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujds1"]
+atlas = ExtResource("2_swajr")
+region = Rect2(48, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tscx3"]
+atlas = ExtResource("2_swajr")
+region = Rect2(64, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2j66"]
+atlas = ExtResource("2_swajr")
+region = Rect2(80, 0, 15, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hibro"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21uwc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qv7ta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikqns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujds1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tscx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2j66")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="coin" type="Area2D" groups=["PickUps"]]
 modulate = Color(0.780392, 0.780392, 0, 1)
@@ -16,7 +66,9 @@ script = ExtResource("1_bp3mw")
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_h3et6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_r5x83")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hibro")
+autoplay = "default"
+frame_progress = 0.0625053
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
