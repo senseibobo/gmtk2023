@@ -15,3 +15,6 @@ func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		print("GAME OVER")
 		# TODO GAME OVER - Show Game Over text, press any key to restart game
+	#if body.is_in_group("PickUps"):
+		#queue_free()
+		#print("coin destroyed")
