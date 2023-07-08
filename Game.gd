@@ -6,6 +6,8 @@ var water_counter: int = 0
 var next_water: int = 8
 var water_width: int = 3
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
+var max_coins: int = 2
+var coins_spawned_counter: int = 0
 
 func _ready():
 	move_step = 1300
@@ -63,6 +65,22 @@ func _process(delta):
 			grass.global_position.x = 1300-move_step
 			grass.global_position.y = 500
 				
+				
+		if coins_spawned_counter < 2:
+			pass #spawn_coin(get_coin_spawn_x(), get_coin_spawn_y())
+		
 	for child in $Moving.get_children():
 		if child.global_position.x < -900:
 			child.queue_free()
+		
+func spawn_coin(x: float, y: float):
+	var coin = preload("res://grass.tscn").instantiate()
+	coin.global_position.x = x
+	coin.global_position.y = y
+	coins_spawned_counter += 1
+
+func get_coin_spawn_x():
+	pass # implement how we get x coordinate for coin spawn, it should be outside of right edge of the screen
+	
+func get_coin_spawn_y():
+	pass # implement how we get y coordinate, for coin spawn, it should be above ground, and snappable to grid
