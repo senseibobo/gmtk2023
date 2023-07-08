@@ -15,6 +15,9 @@ func _physics_process(delta):
 func jump():
 	velocity.y = JUMP_VELOCITY
 
+func drown():
+	pass
+
 func pick_up_coin():
 	coin_counter += 1
 	print("Player has: ", coin_counter, " coins!")

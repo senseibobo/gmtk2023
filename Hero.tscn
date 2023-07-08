@@ -6,6 +6,8 @@
 size = Vector2(50, 50)
 
 [node name="Hero" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_jkltm")
 
 [node name="ColorRect" type="ColorRect" parent="."]
