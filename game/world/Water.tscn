@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbtl2uhlch3ic"]
+[gd_scene load_steps=6 format=3 uid="uid://dbtl2uhlch3ic"]
 
 [ext_resource type="Script" path="res://game/world/Water.gd" id="1_pii0r"]
+[ext_resource type="Texture2D" uid="uid://bn317e3jvdj5n" path="res://game/world/water_tiles_2.png" id="2_hmtwo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc8kw"]
 size = Vector2(64, 286)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v8ctp"]
+texture = ExtResource("2_hmtwo")
+texture_region_size = Vector2i(320, 320)
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_dcfp0"]
+tile_size = Vector2i(320, 320)
+sources/0 = SubResource("TileSetAtlasSource_v8ctp")
 
 [node name="Water" type="Area2D"]
 collision_layer = 0
@@ -11,14 +24,24 @@ collision_mask = 2
 monitorable = false
 script = ExtResource("1_pii0r")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_top = 14.0
-offset_right = 64.0
-offset_bottom = 300.0
-color = Color(0.313726, 0.521569, 1, 0.603922)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(32, 157)
 shape = SubResource("RectangleShape2D_pc8kw")
+
+[node name="TileMap" type="TileMap" parent="."]
+modulate = Color(1, 1, 1, 0.737255)
+z_index = 20
+z_as_relative = false
+position = Vector2(0, 14)
+scale = Vector2(0.1, 0.1)
+tile_set = SubResource("TileSet_dcfp0")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 65536, 0, 65536, 0, 1, 65537, 65536, 1)
+
+[node name="ColorRect" type="ColorRect" parent="TileMap"]
+show_behind_parent = true
+offset_right = 640.0
+offset_bottom = 2870.0
+color = Color(0.427451, 0.482353, 1, 0.603922)
 
 [connection signal="body_entered" from="." to="." method="_on_player_entered"]
