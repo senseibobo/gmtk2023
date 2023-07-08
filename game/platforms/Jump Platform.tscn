@@ -6,7 +6,7 @@
 size = Vector2(34.25, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbgsd"]
-size = Vector2(50, 24)
+size = Vector2(50, 26)
 
 [node name="Jump Platform" type="Area2D"]
 collision_layer = 0
@@ -15,6 +15,7 @@ monitorable = false
 script = ExtResource("1_6fgde")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+offset_top = -2.0
 offset_right = 64.0
 offset_bottom = 24.0
 
@@ -25,7 +26,7 @@ shape = SubResource("RectangleShape2D_51dhp")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(25, 12)
+position = Vector2(25, 11)
 shape = SubResource("RectangleShape2D_bbgsd")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

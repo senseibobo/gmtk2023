@@ -14,6 +14,7 @@ var place_platform_size: Vector2 = Vector2(128,22)
 
 func _ready():
 	move_step = 1600
+	#Engine.time_scale = 2
 
 func _process(delta):
 	
@@ -61,7 +62,6 @@ func spawn_block():
 		if water_counter == next_water + 1:
 			water_width = 2+randi()%2
 		block = preload("res://game/world/Water.tscn").instantiate()
-		#VODU DA URADIM
 		water_width -= 1
 		if water_width == 0:
 			water_counter = 0
@@ -70,7 +70,7 @@ func spawn_block():
 		block = preload("res://game/world/grass.tscn").instantiate()
 	$Moving.add_child(block)
 	block.global_position.x = 1300-move_step
-	block.global_position.y = 288
+	block.global_position.y = 286
 	next_coin -= 1
 	if next_coin <= 0:
 		spawn_coin(1300-move_step-block_spacing/2)
