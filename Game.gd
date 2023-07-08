@@ -9,7 +9,7 @@ var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping plat
 var max_coins: int = 3
 var coins_spawned_counter: int = 0
 var next_coin: int = 10
-var block_spacing: float = 100.0
+var block_spacing: float = 64
 
 func _ready():
 	move_step = 1600
@@ -18,15 +18,15 @@ func _process(delta):
 	
 	if Input.is_action_pressed("select_regular_platform"): #d
 		current_platform_selected = 0
-		$ColorRect.set_size(Vector2(300,50))
+		$ColorRect.set_size(Vector2(192,24))
 	elif Input.is_action_pressed("select_jump_platform"): #s
 		current_platform_selected = 1
-		$ColorRect.set_size(Vector2(50,30)) # idk why this works
+		$ColorRect.set_size(Vector2(50,24)) # idk why this works
 	
 	if current_platform_selected == 0:
 		var offset = fmod($Moving.global_position.x,100)
-		$ColorRect.global_position.x = -150+get_global_mouse_position().x
-		$ColorRect.global_position.y = int(get_global_mouse_position().y-25)/25*25
+		$ColorRect.global_position.x = -96+get_global_mouse_position().x
+		$ColorRect.global_position.y = int(get_global_mouse_position().y-12)/12*12
 		if Input.is_action_just_released("place_platform"):
 			var platform = preload("res://Platform.tscn").instantiate()
 			$Moving.add_child(platform)
@@ -66,16 +66,16 @@ func spawn_block():
 		block = preload("res://grass.tscn").instantiate()
 	$Moving.add_child(block)
 	block.global_position.x = 1300-move_step
-	block.global_position.y = 500
+	block.global_position.y = 300
 	next_coin -= 1
-	if next_coin == 0:
+	if next_coin <= 0:
 		spawn_coin(1300-move_step-block_spacing/2)
 		next_coin = 10+randi()%10
 		
 func spawn_coin(x_position: float):
 	var coin = preload("res://coin.tscn").instantiate()
 	$Moving.add_child(coin)
-	coin.global_position = Vector2(x_position,randf_range(10,450))
+	coin.global_position = Vector2(x_position,randf_range(20,300))
 	coins_spawned_counter += 1
 	print("Coin Spawned!")
 	return coin

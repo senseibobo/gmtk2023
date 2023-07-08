@@ -1,22 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cea15qj48bcn2"]
+[gd_scene load_steps=4 format=3 uid="uid://cea15qj48bcn2"]
 
 [ext_resource type="Script" path="res://coin.gd" id="1_ye3gv"]
+[ext_resource type="Texture2D" uid="uid://t5ii6gx3wpr3" path="res://coin.png" id="2_2nnfi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3et6"]
+radius = 5.49747
 
 [node name="coin" type="Area2D" groups=["PickUps"]]
 modulate = Color(0.780392, 0.780392, 0, 1)
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_ye3gv")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
-color = Color(1, 1, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_h3et6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2nnfi")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
