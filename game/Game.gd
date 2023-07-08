@@ -23,7 +23,7 @@ func _process(delta):
 		place_platform_size = Vector2(128,22) 
 	elif Input.is_action_pressed("select_jump_platform"): #s
 		current_platform_selected = 1
-		place_platform_size = Vector2(50,24) 
+		place_platform_size = Vector2(64,22) 
 	var y2 = int(place_platform_size.y)
 	$ColorRect.set_size(place_platform_size)
 	$ColorRect.global_position = get_global_mouse_position()

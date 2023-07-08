@@ -11,7 +11,7 @@ scale = Vector2(0.1, 0.1)
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 offset_right = 192.0
-offset_bottom = 24.0
+offset_bottom = 22.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(635, 105)
