@@ -3,7 +3,7 @@ extends Node2D
 @export var speed: float = 100.0
 var move_step: float = 0.0
 var water_counter: int = 0
-var next_water: int = 8
+var next_water: int = randi()%4+8
 var water_width: int = 3
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
 var max_coins: int = 3
@@ -12,7 +12,7 @@ var next_coin: int = 10
 var block_spacing: float = 100.0
 
 func _ready():
-	move_step = 1300
+	move_step = 1600
 
 func _process(delta):
 	

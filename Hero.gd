@@ -16,7 +16,15 @@ func jump():
 	velocity.y = JUMP_VELOCITY
 
 func drown():
-	pass
+	var tween = create_tween()
+	gravity = 0
+	tween.tween_property(self,"velocity:y",0.0,0.5)
+	tween.tween_callback(self.death)
+
+func death():
+	var gameover = preload("res://gameover.tscn").instantiate()
+	get_tree().root.add_child(gameover)
+	get_tree().paused = true
 
 func pick_up_coin():
 	coin_counter += 1
