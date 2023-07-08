@@ -10,6 +10,7 @@ var max_coins: int = 3
 var coins_spawned_counter: int = 0
 var next_coin: int = 10
 var block_spacing: float = 64
+var place_platform_size: Vector2 = Vector2(192,24)
 
 func _ready():
 	move_step = 1600
@@ -18,32 +19,27 @@ func _process(delta):
 	
 	if Input.is_action_pressed("select_regular_platform"): #d
 		current_platform_selected = 0
-		$ColorRect.set_size(Vector2(192,24))
+		place_platform_size = Vector2(192,24) 
 	elif Input.is_action_pressed("select_jump_platform"): #s
 		current_platform_selected = 1
-		$ColorRect.set_size(Vector2(50,24)) # idk why this works
-	
-	if current_platform_selected == 0:
-		var offset = fmod($Moving.global_position.x,100)
-		$ColorRect.global_position.x = -96+get_global_mouse_position().x
-		$ColorRect.global_position.y = int(get_global_mouse_position().y-12)/12*12
-		if Input.is_action_just_released("place_platform"):
-			var platform = preload("res://Platform.tscn").instantiate()
-			$Moving.add_child(platform)
-			platform.global_position = $ColorRect.global_position
-	elif current_platform_selected == 1:
-		var offset = fmod($Moving.global_position.x,100)
-		$ColorRect.global_position.x = -25+get_global_mouse_position().x
-		$ColorRect.global_position.y = int(get_global_mouse_position().y)/25*25
-		if Input.is_action_just_released("place_platform"):
-			var platform = preload("res://Jump Platform.tscn").instantiate()
-			$Moving.add_child(platform)
-			platform.global_position = $ColorRect.global_position
+		place_platform_size = Vector2(50,24) 
+	var y2 = int(place_platform_size.y)
+	$ColorRect.set_size(place_platform_size)
+	$ColorRect.global_position = get_global_mouse_position()
+	$ColorRect.global_position.y = int(get_global_mouse_position().y)/y2*y2
+	$ColorRect.global_position.x -= place_platform_size.x/2.0
+	if Input.is_action_just_pressed("place_platform"):
+		var platform
+		if current_platform_selected == 0: platform = preload("res://Platform.tscn").instantiate()
+		elif current_platform_selected == 1: platform = preload("res://Jump Platform.tscn").instantiate()
 		
+		$Moving.add_child(platform)
+		platform.global_position = $ColorRect.global_position
 	$Moving.global_position.x -= delta*speed
 	move_step += delta*speed
-	while move_step >= 100:
+	while move_step >= block_spacing:
 		spawn_block()
+		move_step -= block_spacing
 		
 	for child in $Moving.get_children():
 		if child.global_position.x < -600:
@@ -52,7 +48,6 @@ func _process(delta):
 func spawn_block():
 	var block
 	water_counter += 1
-	move_step -= block_spacing
 	if water_counter > next_water:
 		if water_counter == next_water + 1:
 			water_width = 2+randi()%2
