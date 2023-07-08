@@ -5,19 +5,39 @@ var move_step: float = 0.0
 var water_counter: int = 0
 var next_water: int = 8
 var water_width: int = 3
+var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
 
 func _ready():
 	move_step = 1300
-	Engine.time_scale *= 5
+	#Engine.time_scale *= 3
 
 func _process(delta):
-	var offset = fmod($Moving.global_position.x,100)
-	$ColorRect.global_position.x = -150+get_global_mouse_position().x#int(get_global_mouse_position().x+50)/100*100+offset
-	$ColorRect.global_position.y = int(get_global_mouse_position().y-25)/50*50
-	if Input.is_action_just_released("place_platform"):
-		var platform = preload("res://Platform.tscn").instantiate()
-		$Moving.add_child(platform)
-		platform.global_position = $ColorRect.global_position
+	
+	if Input.is_action_pressed("select_regular_platform"): #d
+		current_platform_selected = 0
+		$ColorRect.set_size(Vector2(300,100))
+	else: if Input.is_action_pressed("select_jump_platform"): #s
+		current_platform_selected = 1
+		$ColorRect.set_size(Vector2(50,60)) # idk why this works
+	
+	if current_platform_selected == 0:
+		var offset = fmod($Moving.global_position.x,100)
+		$ColorRect.global_position.x = -150+get_global_mouse_position().x#int(get_global_mouse_position().x+50)/100*100+offset
+		$ColorRect.global_position.y = int(get_global_mouse_position().y-25)/25*25
+		#var platform = preload("res://Platform.tscn").instantiate()
+		if Input.is_action_just_released("place_platform"):
+			var platform = preload("res://Platform.tscn").instantiate()
+			$Moving.add_child(platform)
+			platform.global_position = $ColorRect.global_position
+	else: if current_platform_selected == 1:
+		var offset = fmod($Moving.global_position.x,100)
+		$ColorRect.global_position.x = -25+get_global_mouse_position().x#int(get_global_mouse_position().x+50)/100*100+offset
+		$ColorRect.global_position.y = int(get_global_mouse_position().y)/25*25
+		#var platform = preload("res://Jump Platform.tscn").instantiate()
+		if Input.is_action_just_released("place_platform"):
+			var platform = preload("res://Jump Platform.tscn").instantiate()
+			$Moving.add_child(platform)
+			platform.global_position = $ColorRect.global_position
 		
 	$Moving.global_position.x -= delta*speed
 	move_step += delta*speed
