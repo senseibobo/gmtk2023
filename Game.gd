@@ -11,16 +11,22 @@ var coins_spawned_counter: int = 0
 
 func _ready():
 	move_step = 1300
+	coins()
 	#Engine.time_scale *= 5
+
+func coins():
+	while true:
+		spawn_coin(get_coin_spawn_position())
+		await get_tree().create_timer(5.0).timeout
 
 func _process(delta):
 	
 	if Input.is_action_pressed("select_regular_platform"): #d
 		current_platform_selected = 0
-		$ColorRect.set_size(Vector2(300,100))
-	else: if Input.is_action_pressed("select_jump_platform"): #s
+		$ColorRect.set_size(Vector2(300,50))
+	elif Input.is_action_pressed("select_jump_platform"): #s
 		current_platform_selected = 1
-		$ColorRect.set_size(Vector2(50,60)) # idk why this works
+		$ColorRect.set_size(Vector2(50,30)) # idk why this works
 	
 	if current_platform_selected == 0:
 		var offset = fmod($Moving.global_position.x,100)
@@ -31,7 +37,7 @@ func _process(delta):
 			var platform = preload("res://Platform.tscn").instantiate()
 			$Moving.add_child(platform)
 			platform.global_position = $ColorRect.global_position
-	else: if current_platform_selected == 1:
+	elif current_platform_selected == 1:
 		var offset = fmod($Moving.global_position.x,100)
 		$ColorRect.global_position.x = -25+get_global_mouse_position().x#int(get_global_mouse_position().x+50)/100*100+offset
 		$ColorRect.global_position.y = int(get_global_mouse_position().y)/25*25
