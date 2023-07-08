@@ -4,7 +4,7 @@ extends Node2D
 var move_step: float = 0.0
 var water_counter: int = 0
 var next_water: int = randi()%4+15
-var water_width: int = 3
+var water_width: int = 6
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
 var max_coins: int = 3
 var coins_spawned_counter: int = 0
@@ -14,37 +14,43 @@ var place_platform_size: Vector2 = Vector2(128,22)
 
 func _ready():
 	move_step = 1600
+	set_platform_placement(preload("res://game/platforms/Platform.tscn"))
 	#Engine.time_scale = 2
 
+var platform_scene
+
+func set_platform_placement(platform_scene):
+	self.platform_scene = platform_scene
+	var platform = platform_scene.instantiate()
+	for child in $PlatformPlacement.get_children():
+		$PlatformPlacement.get_child(0).queue_free()
+	$PlatformPlacement.add_child(platform)
+	platform.disable()
+	platform.modulate.a = 0.5
+
 func _process(delta):
-	
+	var pp = $PlatformPlacement
+	pp.global_position = get_global_mouse_position()
+	pp.global_position.y = int(pp.global_position.y)/22*22+11
 	if Input.is_action_pressed("select_regular_platform"): #d
+		set_platform_placement(preload("res://game/platforms/Platform.tscn"))
 		current_platform_selected = 0
 		place_platform_size = Vector2(128,22) 
 	elif Input.is_action_pressed("select_jump_platform"): #s
+		set_platform_placement(preload("res://game/platforms/Jump Platform.tscn"))
 		current_platform_selected = 1
-		place_platform_size = Vector2(64,22) 
-	var y2 = int(place_platform_size.y)
-	$ColorRect.set_size(place_platform_size)
-	$ColorRect.global_position = get_global_mouse_position()
-	$ColorRect.global_position.y = int(get_global_mouse_position().y)/y2*y2
-	$ColorRect.global_position.x -= place_platform_size.x/2.0
-	var rect: Rect2 = $ColorRect.get_global_rect()
-	var valid = true
-	for p in 4:
-		var ox = (p%2)*32-16
-		var oy = (p/2)*32-32
-		if rect.has_point(Global.hero.global_position+Vector2(ox,oy)):
-			valid = false
-			break
-	$ColorRect.color = Color.WHITE if valid else Color.RED
+		place_platform_size = Vector2(64,22)
+	var valid = check_platform_valid()
+	$PlatformPlacement.modulate = Color(1.0,int(valid),int(valid),1.0)
 	if valid and Input.is_action_just_pressed("place_platform"):
-		var platform
-		if current_platform_selected == 0: platform = preload("res://game/platforms/Platform.tscn").instantiate()
-		elif current_platform_selected == 1: platform = preload("res://game/platforms/Jump Platform.tscn").instantiate()
-		
+		var platform = $PlatformPlacement.get_child(0)
+		var pos = platform.global_position
+		$PlatformPlacement.remove_child(platform)
 		$Moving.add_child(platform)
-		platform.global_position = $ColorRect.global_position
+		platform.global_position = pos
+		platform.modulate.a = 1.0
+		platform.enable()
+		set_platform_placement(platform_scene)
 	$Moving.global_position.x -= delta*speed
 	move_step += delta*speed
 	while move_step >= block_spacing:
@@ -54,18 +60,42 @@ func _process(delta):
 	for child in $Moving.get_children():
 		if child.global_position.x < -600:
 			child.queue_free()
-		
+
+func check_platform_valid():
+	var space = get_world_2d().direct_space_state
+	var params = PhysicsShapeQueryParameters2D.new()
+	var platform = $PlatformPlacement.get_child(0)
+	var shape = platform.get_node("CollisionShape2D").shape.duplicate(true)
+	shape.extents *= 0.75
+	params.shape = shape
+	params.transform = platform.get_global_transform().scaled_local(Vector2(0.70,0.70))
+	params.collision_mask = 3
+	var ground = platform.get_node_or_null("Ground")
+	if ground:
+		var params2 = PhysicsShapeQueryParameters2D.new()
+		var shape2 = ground.shape.duplicate(true)
+		params2.shape = shape2
+		params2.transform = ground.get_global_transform()
+		params2.collision_mask = 3
+		var result2 = space.intersect_shape(params2,1)
+		print(result2)
+		if result2.size() == 0:
+			return false
+	var result = space.intersect_shape(params,1)
+	return result.size() == 0
+	
+
 func spawn_block():
 	var block
 	water_counter += 1
 	if water_counter > next_water:
 		if water_counter == next_water + 1:
-			water_width = 2+randi()%2
+			water_width = 6+randi()%4
 		block = preload("res://game/world/Water.tscn").instantiate()
 		water_width -= 1
 		if water_width == 0:
 			water_counter = 0
-			next_water = 7+randi()%3
+			next_water = 2+randi()%3
 	else:
 		block = preload("res://game/world/grass.tscn").instantiate()
 	$Moving.add_child(block)

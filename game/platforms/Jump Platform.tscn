@@ -1,31 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce0wgbb4ru76f"]
+[gd_scene load_steps=5 format=3 uid="uid://ce0wgbb4ru76f"]
 
 [ext_resource type="Script" path="res://game/platforms/Jump Platform.gd" id="1_6fgde"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51dhp"]
-size = Vector2(34.25, 17)
+size = Vector2(63.5, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbgsd"]
-size = Vector2(50, 23)
+size = Vector2(36, 14)
 
-[node name="Jump Platform" type="Area2D"]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oqvv"]
+size = Vector2(64, 4.5)
+
+[node name="Jump Platform" type="StaticBody2D"]
+z_index = 60
+z_as_relative = false
+collision_mask = 0
 script = ExtResource("1_6fgde")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 64.0
-offset_bottom = 24.0
+offset_left = -32.0
+offset_top = 11.0
+offset_right = 32.0
+offset_bottom = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(33, -8)
+position = Vector2(0.25, 11.5)
 shape = SubResource("RectangleShape2D_51dhp")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(25, 12.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(14, 4)
 shape = SubResource("RectangleShape2D_bbgsd")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Ground" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_8oqvv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

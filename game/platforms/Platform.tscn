@@ -1,23 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dksmof4rrv72l"]
+[gd_scene load_steps=4 format=3 uid="uid://dksmof4rrv72l"]
 
+[ext_resource type="Script" path="res://game/platforms/Platform.gd" id="1_cdym5"]
 [ext_resource type="Texture2D" uid="uid://bfhj1icvt3key" path="res://game/platforms/platforma.png" id="1_xn473"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03avx"]
-size = Vector2(1270, 420)
+size = Vector2(1270, 370)
 
 [node name="Platform" type="StaticBody2D"]
 scale = Vector2(0.1, 0.1)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_right = 192.0
-offset_bottom = 22.0
+script = ExtResource("1_cdym5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(635, 105)
+position = Vector2(0, -12.5)
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_03avx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xn473")
-centered = false
