@@ -73,7 +73,7 @@ func _process(delta):
 			grass.global_position.y = 500
 		
 	for child in $Moving.get_children():
-		if child.global_position.x < -300:
+		if child.global_position.x < -600:
 			child.queue_free()
 		
 		
