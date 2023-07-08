@@ -9,8 +9,8 @@ var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping plat
 var max_coins: int = 3
 var coins_spawned_counter: int = 0
 var next_coin: int = 10
-var block_spacing: float = 64
-var place_platform_size: Vector2 = Vector2(192,24)
+var block_spacing: float = 60
+var place_platform_size: Vector2 = Vector2(96,32)
 
 func _ready():
 	move_step = 1600
@@ -19,7 +19,7 @@ func _process(delta):
 	
 	if Input.is_action_pressed("select_regular_platform"): #d
 		current_platform_selected = 0
-		place_platform_size = Vector2(192,24) 
+		place_platform_size = Vector2(96,32) 
 	elif Input.is_action_pressed("select_jump_platform"): #s
 		current_platform_selected = 1
 		place_platform_size = Vector2(50,24) 
