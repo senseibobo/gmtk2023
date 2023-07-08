@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://v5rec5tea6rr"]
 
-[ext_resource type="Script" path="res://Game.gd" id="1_0w5nu"]
-[ext_resource type="PackedScene" uid="uid://mcdv3twmuodh" path="res://Hero.tscn" id="2_qt7xd"]
-[ext_resource type="Script" path="res://Game Over.gd" id="3_clqii"]
+[ext_resource type="Script" path="res://game/Game.gd" id="1_dydng"]
+[ext_resource type="PackedScene" uid="uid://mcdv3twmuodh" path="res://game/hero/Hero.tscn" id="2_x7yqc"]
+[ext_resource type="Script" path="res://game/world/Game Over.gd" id="3_j3yf2"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rpryy"]
 a = Vector2(0.5, -0.384615)
 b = Vector2(-3.05176e-05, 18.8)
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_0w5nu")
+script = ExtResource("1_dydng")
 
 [node name="Moving" type="Node2D" parent="."]
 
@@ -18,13 +18,13 @@ offset_right = 192.0
 offset_bottom = 24.0
 color = Color(1, 1, 1, 0.301961)
 
-[node name="Hero" parent="." instance=ExtResource("2_qt7xd")]
+[node name="Hero" parent="." instance=ExtResource("2_x7yqc")]
 position = Vector2(168, 225)
 
 [node name="Game Over Collision" type="Area2D" parent="." groups=["WorldBorder"]]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("3_clqii")
+script = ExtResource("3_j3yf2")
 
 [node name="LeftCollisionLine" type="CollisionShape2D" parent="Game Over Collision"]
 position = Vector2(-50, 0)

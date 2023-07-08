@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy8hnivjmxo8e"]
+[gd_scene load_steps=3 format=3 uid="uid://dbtl2uhlch3ic"]
 
-[ext_resource type="Script" path="res://Water.gd" id="1_l4aor"]
+[ext_resource type="Script" path="res://game/world/Water.gd" id="1_pii0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc8kw"]
 size = Vector2(64, 286)
@@ -9,7 +9,7 @@ size = Vector2(64, 286)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-script = ExtResource("1_l4aor")
+script = ExtResource("1_pii0r")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_top = 14.0

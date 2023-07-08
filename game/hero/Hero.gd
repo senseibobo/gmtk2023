@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -460.0
 var gravity = 900
 
 func _ready():
+	Global.hero = self
 	Global.game_over_signal.connect($UI.hide)
 
 func _physics_process(delta):
