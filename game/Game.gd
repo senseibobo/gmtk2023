@@ -1,6 +1,8 @@
 extends Node2D
 
+var active: bool = false
 @export var speed: float = 100.0
+var time: float = 10
 var move_step: float = 0.0
 var water_counter: int = 0
 var next_water: int = randi()%4+15
@@ -12,9 +14,23 @@ var next_coin: int = 10
 var block_spacing: float = 63.5
 var place_platform_size: Vector2 = Vector2(128,22)
 
+func start_game():
+	Global.coin_count = 0
+	Global.distance = 0
+	active = true
+	Global.game_started_signal.emit()
+	$Menu.hide()
+	$HUD.show()
+
 func _ready():
+	$Menu/VBoxContainer/Coins.text = str(Global.wallet)
+	$Menu/VBoxContainer/MaxDistance.text = str(Global.longest_distance).pad_decimals(1) + "m"
+	if Global.restart_v:
+		Global.restart_v = false
+		start_game()
 	move_step = 1600
 	set_platform_placement(preload("res://game/platforms/Platform.tscn"))
+	generate_world()
 	#Engine.time_scale = 4
 
 var platform_scene
@@ -29,6 +45,9 @@ func set_platform_placement(platform_scene):
 	platform.modulate.a = 0.5
 
 func _process(delta):
+	if not active: return
+	time += delta
+	speed = log(time)*60
 	var pp = $PlatformPlacement
 	pp.global_position = get_global_mouse_position()
 	pp.global_position.y = int(pp.global_position.y)/22*22+11
@@ -54,14 +73,20 @@ func _process(delta):
 	$Moving.global_position.x -= delta*speed
 	$Background.move(delta*speed)
 	move_step += delta*speed
-	while move_step >= block_spacing:
-		spawn_block()
-		move_step -= block_spacing
+	Global.distance += delta*speed/60.0
+	generate_world()
+	$HUD/VBoxContainer/Coins.text = str(Global.coin_count)
+	$HUD/VBoxContainer/Distance.text = str(Global.distance).pad_decimals(1) + "m"
 		
 	for child in $Moving.get_children():
 		if child.global_position.x < -600:
 			child.queue_free()
 
+func generate_world():
+	while move_step >= block_spacing:
+		spawn_block()
+		move_step -= block_spacing
+	
 func check_platform_valid():
 	var platform = $PlatformPlacement.get_child(0)
 	var space = get_world_2d().direct_space_state
@@ -85,7 +110,6 @@ func check_platform_valid():
 		params2.transform = ground.get_global_transform()
 		params2.collision_mask = 1
 		var result2 = space.intersect_shape(params2,1)
-		print(result2)
 		check2 = result2.size() != 0
 	return check1 and check2
 
@@ -108,12 +132,30 @@ func spawn_block():
 	next_coin -= 1
 	if next_coin <= 0:
 		spawn_coin(1300-move_step-block_spacing/2)
-		next_coin = 10+randi()%10
+		next_coin = 10+randi()%10 # oba podeli sa 2 ako dupliras skor
 		
 func spawn_coin(x_position: float):
 	var coin = preload("res://game/world/coin.tscn").instantiate()
 	$Moving.add_child(coin)
-	coin.global_position = Vector2(x_position,randf_range(20,300))
+	coin.global_position = Vector2(x_position,randf_range(20,280))
 	coins_spawned_counter += 1
 	print("Coin Spawned!")
 	return coin
+
+
+func _on_quit_pressed():
+	get_tree().quit()
+
+
+func _on_shop_pressed():
+	$Menu/MainMenu.hide()
+	$Menu/ShopMenu.show()
+
+
+func _on_back_pressed():
+	$Menu/MainMenu.show()
+	$Menu/ShopMenu.hide()
+
+
+func _on_reset_pressed():
+	Global.reset_data()

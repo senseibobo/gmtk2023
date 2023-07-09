@@ -1,9 +1,28 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ipdljmc7o6tf"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ipdljmc7o6tf"]
 
 [ext_resource type="FontFile" uid="uid://cvbswyj3xvinr" path="res://ui/slkscre.ttf" id="1_g4unm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ssjt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3yuih"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8txb"]
+bg_color = Color(0, 0, 0, 0.415686)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru3ts"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crxwf"]
 
 [resource]
 default_font = ExtResource("1_g4unm")
 default_font_size = 20
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 28
+Button/styles/disabled = SubResource("StyleBoxEmpty_6ssjt")
+Button/styles/focus = SubResource("StyleBoxEmpty_3yuih")
+Button/styles/hover = SubResource("StyleBoxFlat_u8txb")
+Button/styles/normal = SubResource("StyleBoxEmpty_ru3ts")
+Button/styles/pressed = SubResource("StyleBoxEmpty_crxwf")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 8

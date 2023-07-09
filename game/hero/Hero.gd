@@ -7,12 +7,14 @@ var gravity = 900
 
 func _ready():
 	Global.hero = self
-	Global.game_over_signal.connect($UI.hide)
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 			
+	if global_position.x < 160:
+		velocity.x = 30
+	else: velocity.x = 0
 	move_and_slide()
 
 func jump():
@@ -26,4 +28,3 @@ func drown():
 
 func pick_up_coin():
 	Global.coin_count += 1
-	$UI/Score.text = "Score: " + str(Global.coin_count)
