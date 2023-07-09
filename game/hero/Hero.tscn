@@ -1,11 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://mcdv3twmuodh"]
+[gd_scene load_steps=14 format=3 uid="uid://mcdv3twmuodh"]
 
 [ext_resource type="Script" path="res://game/hero/Hero.gd" id="1_tf3s2"]
 [ext_resource type="Texture2D" uid="uid://d1onfbc3nw840" path="res://game/hero/grandpa_animation_sheet.png" id="2_0ey4v"]
+[ext_resource type="Texture2D" uid="uid://cwmcmw0v4wmdd" path="res://ui/dekica_still.png" id="3_f76d1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_txxm6"]
 radius = 16.0
 height = 60.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwpt3"]
+atlas = ExtResource("2_0ey4v")
+region = Rect2(3840, 0, 640, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqxur"]
+atlas = ExtResource("2_0ey4v")
+region = Rect2(4480, 0, 640, 960)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6gxf8"]
 atlas = ExtResource("2_0ey4v")
@@ -31,17 +40,15 @@ region = Rect2(2560, 0, 640, 960)
 atlas = ExtResource("2_0ey4v")
 region = Rect2(3200, 0, 640, 960)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fwpt3"]
-atlas = ExtResource("2_0ey4v")
-region = Rect2(3840, 0, 640, 960)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iqxur"]
-atlas = ExtResource("2_0ey4v")
-region = Rect2(4480, 0, 640, 960)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_fk5pa"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwpt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqxur")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6gxf8")
 }, {
@@ -59,16 +66,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_41sqh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fwpt3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iqxur")
 }],
 "loop": true,
 "name": &"default",
 "speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f76d1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [node name="Hero" type="CharacterBody2D" groups=["Player"]]
@@ -82,7 +91,7 @@ shape = SubResource("CapsuleShape2D_txxm6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.064, 0.064)
 sprite_frames = SubResource("SpriteFrames_fk5pa")
-autoplay = "default"
+autoplay = "idle"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 36)

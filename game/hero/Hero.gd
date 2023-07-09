@@ -31,7 +31,11 @@ func _ready():
 	timer.start(0.5)
 	timer.timeout.connect(footstep)
 	Global.hero = self
+	Global.game_started_signal.connect(start)
 
+func start():
+	$AnimatedSprite2D.play("default")
+	
 func footstep():
 	if $RayCast2D.is_colliding():
 		var collider = $RayCast2D.get_collider()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://v5rec5tea6rr"]
+[gd_scene load_steps=39 format=3 uid="uid://v5rec5tea6rr"]
 
 [ext_resource type="Script" path="res://game/Game.gd" id="1_dydng"]
 [ext_resource type="PackedScene" uid="uid://mcdv3twmuodh" path="res://game/hero/Hero.tscn" id="2_x7yqc"]
@@ -12,8 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://qdqch3iss41s" path="res://game/world/lava_tiles_2.png" id="10_8yw3b"]
 [ext_resource type="Texture2D" uid="uid://hi57b7km05lt" path="res://game/world/coin_animation.png" id="11_0o877"]
 [ext_resource type="Texture2D" uid="uid://cevl5o6xrdy0g" path="res://ui/shop_bg.png" id="11_7up5p"]
+[ext_resource type="Texture2D" uid="uid://cnby8novmrdms" path="res://ui/cokoladica.png" id="11_gc30c"]
 [ext_resource type="Texture2D" uid="uid://d1onfbc3nw840" path="res://game/hero/grandpa_animation_sheet.png" id="12_jc18m"]
 [ext_resource type="Texture2D" uid="uid://6bacghi3tod4" path="res://ui/lock.png" id="12_ruv2x"]
+[ext_resource type="Texture2D" uid="uid://cy3toho6ysnuh" path="res://ui/lopta.png" id="14_xrx60"]
+[ext_resource type="Texture2D" uid="uid://5qpoln8fogfo" path="res://ui/pingvinko.png" id="15_qlqnd"]
+[ext_resource type="Texture2D" uid="uid://64xyp1c5dscb" path="res://ui/skejt.png" id="16_34cbj"]
+[ext_resource type="Texture2D" uid="uid://b643bj2cb2ftq" path="res://ui/nintendo.png" id="17_t7isj"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rpryy"]
 a = Vector2(0.5, -0.384615)
@@ -269,7 +274,6 @@ theme_override_font_sizes/font_size = 11
 text = "RESET DATA"
 
 [node name="ShopMenu" type="VBoxContainer" parent="Menu"]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -292,7 +296,6 @@ theme_override_constants/separation = 30
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 disabled = true
-icon = ExtResource("10_8yw3b")
 icon_alignment = 1
 expand_icon = true
 
@@ -324,6 +327,21 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_7up5p")
+expand_mode = 1
+
+[node name="Item" type="TextureRect" parent="Menu/ShopMenu/Items/Item1/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_gc30c")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item1/Control"]
@@ -415,6 +433,21 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_7up5p")
+expand_mode = 1
+
+[node name="Item" type="TextureRect" parent="Menu/ShopMenu/Items/Item2/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_xrx60")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item2/Control"]
@@ -509,6 +542,21 @@ grow_vertical = 2
 texture = ExtResource("11_7up5p")
 expand_mode = 1
 
+[node name="Item" type="TextureRect" parent="Menu/ShopMenu/Items/Item3/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_qlqnd")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item3/Control"]
 layout_mode = 1
 anchors_preset = 5
@@ -601,6 +649,21 @@ grow_vertical = 2
 texture = ExtResource("11_7up5p")
 expand_mode = 1
 
+[node name="Item" type="TextureRect" parent="Menu/ShopMenu/Items/Item4/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_34cbj")
+expand_mode = 1
+
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item4/Control"]
 layout_mode = 1
 anchors_preset = 5
@@ -691,6 +754,21 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_7up5p")
+expand_mode = 1
+
+[node name="Item" type="TextureRect" parent="Menu/ShopMenu/Items/Item5/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_t7isj")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item5/Control"]
