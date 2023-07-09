@@ -19,9 +19,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "GAME OVER
-R - RESTART
-ESC - MAIN MENU"
+text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -42,3 +40,16 @@ visible = false
 layout_mode = 2
 text = "Score: 251204081"
 horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "R - RESTART"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "M - MAIN MENU"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="restart"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="to_mainmenu"]
