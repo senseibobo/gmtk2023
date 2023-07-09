@@ -8,9 +8,8 @@ var water_counter: int = 0
 var next_water: int = randi()%4+15
 var water_width: int = 6
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
-var max_coins: int = 3
-var coins_spawned_counter: int = 0
-var next_coin: int = 10
+var next_coin: int = 30
+var next_enemy: int = 30
 var block_spacing: float = 63.5
 var place_platform_size: Vector2 = Vector2(128,22)
 
@@ -133,15 +132,24 @@ func spawn_block():
 	if next_coin <= 0:
 		spawn_coin(1300-move_step-block_spacing/2)
 		next_coin = 6+randi()%6 # oba podeli sa 2 ako dupliras skor
+	next_enemy -= 1
+	if next_enemy <= 0:
+		spawn_enemy(1300-move_step-block_spacing/2)
+		next_enemy = 6+randi()%6 # oba podeli sa 2 ako dupliras skor
 		
 func spawn_coin(x_position: float):
 	var coin = preload("res://game/world/coin.tscn").instantiate()
 	$Moving.add_child(coin)
 	coin.global_position = Vector2(x_position,randf_range(20,280))
-	coins_spawned_counter += 1
 	print("Coin Spawned!")
 	return coin
-
+	
+func spawn_enemy(x_position: float):
+	var enemy = preload("res://game/world/Enemy.tscn").instantiate()
+	$Moving.add_child(enemy)
+	enemy.global_position = Vector2(x_position,randf_range(20,280))
+	print("Enemy Spawned!")
+	return enemy
 
 func _on_quit_pressed():
 	get_tree().quit()
@@ -159,3 +167,5 @@ func _on_back_pressed():
 
 func _on_reset_pressed():
 	Global.reset_data()
+	$Menu/VBoxContainer/Coins.text = "0"
+	$Menu/VBoxContainer/MaxDistance.text = "0M"

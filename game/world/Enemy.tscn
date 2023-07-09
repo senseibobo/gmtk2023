@@ -1,17 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://ou77wqeytf6f"]
+[gd_scene load_steps=9 format=3 uid="uid://ou77wqeytf6f"]
 
 [ext_resource type="Script" path="res://game/world/Enemy.gd" id="1_b8kms"]
+[ext_resource type="Texture2D" uid="uid://cowdwwm6v7n2s" path="res://game/world/grim_riper.png" id="2_o1e21"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duk8n"]
+radius = 15.0
+height = 60.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg5u8"]
+atlas = ExtResource("2_o1e21")
+region = Rect2(0, 0, 640, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bkp7"]
+atlas = ExtResource("2_o1e21")
+region = Rect2(640, 0, 640, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j80w8"]
+atlas = ExtResource("2_o1e21")
+region = Rect2(1280, 0, 640, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxnsw"]
+atlas = ExtResource("2_o1e21")
+region = Rect2(1920, 0, 640, 960)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1e3ax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg5u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bkp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j80w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxnsw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Enemy" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_b8kms")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -10.0
-offset_top = -15.0
-offset_right = 10.0
-offset_bottom = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_duk8n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, -1)
+scale = Vector2(0.064, 0.064)
+sprite_frames = SubResource("SpriteFrames_1e3ax")
+autoplay = "default"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
