@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://gtrlx0l82umc"
+path="res://.godot/imported/CASH REGISTER-01.wav-6943a3b1f52105110100d0fac66683b7.sample"
+
+[deps]
+
+source_file="res://sound/CASH REGISTER/CASH REGISTER-01.wav"
+dest_files=["res://.godot/imported/CASH REGISTER-01.wav-6943a3b1f52105110100d0fac66683b7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

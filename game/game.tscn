@@ -204,7 +204,6 @@ centered = false
 
 [node name="Sprite2D4" type="Sprite2D" parent="Background/Mountains"]
 position = Vector2(2880, 540)
-scale = Vector2(1, 1)
 texture = ExtResource("5_lciuw")
 
 [node name="Trees" type="Sprite2D" parent="Background"]
@@ -215,7 +214,6 @@ centered = false
 
 [node name="Sprite2D4" type="Sprite2D" parent="Background/Trees"]
 position = Vector2(5675, 540)
-scale = Vector2(1, 1)
 texture = ExtResource("6_lu3k5")
 
 [node name="TileMap" type="TileMap" parent="Background/Trees"]

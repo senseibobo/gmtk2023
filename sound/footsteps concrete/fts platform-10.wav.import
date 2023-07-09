@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nun5o865h8xg"
+path="res://.godot/imported/fts platform-10.wav-cc213b454e74e46488bee23c0ca36354.sample"
+
+[deps]
+
+source_file="res://sound/footsteps concrete/fts platform-10.wav"
+dest_files=["res://.godot/imported/fts platform-10.wav-cc213b454e74e46488bee23c0ca36354.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dysjcx0qgfxv6"
+path="res://.godot/imported/small steps platform-01.wav-0e680ed0b7d6d4e08104793f4ffbb733.sample"
+
+[deps]
+
+source_file="res://sound/footsteps concrete/small steps platform-01.wav"
+dest_files=["res://.godot/imported/small steps platform-01.wav-0e680ed0b7d6d4e08104793f4ffbb733.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

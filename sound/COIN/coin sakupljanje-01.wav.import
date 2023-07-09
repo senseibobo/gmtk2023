@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxl8p2f1dciia"
+path="res://.godot/imported/coin sakupljanje-01.wav-d3bd95b2b7304b5c0c40591761be66fb.sample"
+
+[deps]
+
+source_file="res://sound/COIN/coin sakupljanje-01.wav"
+dest_files=["res://.godot/imported/coin sakupljanje-01.wav-d3bd95b2b7304b5c0c40591761be66fb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
