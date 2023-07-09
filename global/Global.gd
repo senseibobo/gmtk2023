@@ -9,10 +9,15 @@ var wallet: int = 0 # long run
 var distance: float = 0
 var longest_distance: float = 0
 var hero: CharacterBody2D
+var purchased_items = []
 
 func _ready():
+	Global.play_sound(preload("res://sound/Theme.wav"))
 	if FileAccess.file_exists("user://save.json"):
 		load_game()
+
+func purchase_item(index):
+	purchased_items.append(index)
 
 func play_sound(stream: AudioStream, from_position: float = 0.0, volume_db: float = 0.0, pitch: float = 1.0, bus: String = "Master", pause_on_pause: bool = false):
 	var player = AudioStreamPlayer.new()
@@ -28,6 +33,11 @@ func play_sound(stream: AudioStream, from_position: float = 0.0, volume_db: floa
 	
 
 func reset_data():
+	Global.wallet = 0
+	Global.longest_distance = 0
+	Global.distance = 0
+	Global.coin_count = 0
+	Global.purchased_items = []
 	var file = DirAccess.open("user://")
 	file.remove("save.json")
 
@@ -36,10 +46,13 @@ func load_game():
 	var data = JSON.parse_string(string)
 	wallet = data["coins"]
 	longest_distance = data["distance"]
+	if data.has("items"):
+		print("ucitanos")
+		purchased_items = data["items"]
 
 func save_game():
 	var file = FileAccess.open("user://save.json",FileAccess.WRITE)
-	var json = JSON.stringify({"coins":wallet,"distance":longest_distance})
+	var json = JSON.stringify({"coins":wallet,"distance":longest_distance,"items":purchased_items})
 	file.store_string(json)
 	file.close()
 

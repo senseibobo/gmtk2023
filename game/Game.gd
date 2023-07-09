@@ -49,15 +49,59 @@ func button_hovered():
 func button_pressed():
 	Global.play_sound(button_press_sounds[randi()%button_press_sounds.size()])
 
+const item_distances = [30,60,90,120,150]
+const item_costs = [10,20,30,40,50]
+
+func item_pressed(index: int):
+	print("pressed " + str(index))
+	if item_costs[index] <= Global.wallet:
+		Global.wallet -= item_costs[index]
+		update_stats()
+		Global.purchase_item(index)
+		Global.save_game()
+		init_buttons()
+
+func update_stats():
+	$Menu/VBoxContainer/Coins.text = str(Global.wallet)
+	$Menu/VBoxContainer/MaxDistance.text = str(Global.longest_distance).pad_decimals(1) + "m"
+	$HUD/VBoxContainer/Coins.text = str(Global.coin_count)
+	$HUD/VBoxContainer/Distance.text = str(Global.distance).pad_decimals(1) + "m"
+
+func init_buttons():
+	await get_tree().create_timer(0.2).timeout
+	print(Global.purchased_items)
+	var i = 0
+	for item in $Menu/ShopMenu/Items.get_children():
+		item.get_node("Control/Label").text = "Unlocks\nat " + str(item_distances[i]) + "m"
+		item.get_node("Control/Label2").text = str(item_costs[i]) + " coins"
+		var arr = []
+		for x in Global.purchased_items:
+			arr.append(int(x))
+		item.get_node("Control/Lock/Sprite2D").texture = preload("res://ui/lock.png")
+		if i in arr:
+			item.get_node("Control/Lock/Sprite2D").texture = preload("res://ui/check.png")
+			item.disabled = true
+			item.get_node("Control/Lock").show()
+		elif item_distances[i] < Global.longest_distance:
+			item.get_node("Control/Lock").hide()
+			item.disabled = false
+		else:
+			item.get_node("Control/Lock").show()
+			item.disabled = true
+		i += 1
+
+
 func _ready():
-	
+	var i = 0
+	for item in $Menu/ShopMenu/Items.get_children():
+		item.pressed.connect(item_pressed.bind(i))
+		i += 1
+	init_buttons.call_deferred()
 	for button in get_all_buttons(self):
 		button.mouse_entered.connect(self.button_hovered)
 		button.pressed.connect(self.button_pressed)
-	Global.play_sound(preload("res://sound/AMBIENCE.wav"))
-	Global.play_sound(preload("res://sound/Theme.wav"))
-	$Menu/VBoxContainer/Coins.text = str(Global.wallet)
-	$Menu/VBoxContainer/MaxDistance.text = str(Global.longest_distance).pad_decimals(1) + "m"
+	Global.play_sound(preload("res://sound/AMBIENCE.wav"),0.0,-8,2)
+	update_stats()
 	if Global.restart_v:
 		Global.restart_v = false
 		start_game()
@@ -128,8 +172,7 @@ func _process(delta):
 	move_step += delta*speed
 	Global.distance += delta*speed/60.0
 	generate_world()
-	$HUD/VBoxContainer/Coins.text = str(Global.coin_count)
-	$HUD/VBoxContainer/Distance.text = str(Global.distance).pad_decimals(1) + "m"
+	update_stats()
 		
 	for child in $Moving.get_children():
 		if child.global_position.x < -600:
@@ -232,3 +275,5 @@ func _on_reset_pressed():
 	Global.reset_data()
 	$Menu/VBoxContainer/Coins.text = "0"
 	$Menu/VBoxContainer/MaxDistance.text = "0M"
+	update_stats()
+	init_buttons()

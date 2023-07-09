@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://v5rec5tea6rr"]
+[gd_scene load_steps=34 format=3 uid="uid://v5rec5tea6rr"]
 
 [ext_resource type="Script" path="res://game/Game.gd" id="1_dydng"]
 [ext_resource type="PackedScene" uid="uid://mcdv3twmuodh" path="res://game/hero/Hero.tscn" id="2_x7yqc"]
@@ -11,8 +11,9 @@
 [ext_resource type="Theme" uid="uid://ipdljmc7o6tf" path="res://ui/miantheme.tres" id="9_1877w"]
 [ext_resource type="Texture2D" uid="uid://qdqch3iss41s" path="res://game/world/lava_tiles_2.png" id="10_8yw3b"]
 [ext_resource type="Texture2D" uid="uid://hi57b7km05lt" path="res://game/world/coin_animation.png" id="11_0o877"]
-[ext_resource type="Texture2D" uid="uid://cvl372odw03hf" path="res://icon.svg" id="11_6kbiw"]
+[ext_resource type="Texture2D" uid="uid://cevl5o6xrdy0g" path="res://ui/shop_bg.png" id="11_7up5p"]
 [ext_resource type="Texture2D" uid="uid://d1onfbc3nw840" path="res://game/hero/grandpa_animation_sheet.png" id="12_jc18m"]
+[ext_resource type="Texture2D" uid="uid://6bacghi3tod4" path="res://ui/lock.png" id="12_ruv2x"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rpryy"]
 a = Vector2(0.5, -0.384615)
@@ -227,6 +228,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(655359, 0, 0, 589824, 65536, 0, 589825, 65536, 0, 589826, 65536, 0, 589827, 65536, 0, 589828, 65536, 0, 589829, 65536, 0, 589830, 65536, 0, 589831, 65536, 0, 589832, 65536, 0, 589833, 65536, 0, 589834, 65536, 0, 589835, 65536, 0, 589836, 65536, 0, 589837, 65536, 0, 589838, 65536, 0, 589839, 65536, 0, 589840, 65536, 0, 589841, 65536, 0, 589842, 65536, 0, 589843, 65536, 0, 589844, 65536, 0, 589845, 65536, 0, 720895, 65536, 1, 655360, 65536, 1, 655361, 65536, 1, 655362, 65536, 1, 655363, 65536, 1, 655364, 65536, 1, 655365, 65536, 1, 655366, 65536, 1, 655367, 65536, 1, 655368, 65536, 1, 655369, 65536, 1, 655370, 65536, 1, 655371, 65536, 1, 655372, 65536, 1, 655373, 65536, 1, 655374, 65536, 1, 655375, 65536, 1, 655376, 65536, 1, 655377, 65536, 1, 655378, 65536, 1, 655379, 65536, 1, 655380, 65536, 1, 655381, 65536, 1, 786431, 65536, 1, 720896, 65536, 1, 720897, 65536, 1, 720898, 65536, 1, 720899, 65536, 1, 720900, 65536, 1, 720901, 65536, 1, 720902, 65536, 1, 720903, 65536, 1, 720904, 65536, 1, 720905, 65536, 1, 720906, 65536, 1, 720907, 65536, 1, 720908, 65536, 1, 720909, 65536, 1, 720910, 65536, 1, 720911, 65536, 1, 720912, 65536, 1, 720913, 65536, 1, 720914, 65536, 1, 720915, 65536, 1, 720916, 65536, 1, 720917, 65536, 1, 589846, 65536, 0, 589860, 65536, 0, 589859, 65536, 0, 589858, 65536, 0, 589857, 65536, 0, 589856, 65536, 0, 589855, 65536, 0, 589854, 65536, 0, 589853, 65536, 0, 589852, 65536, 0, 589851, 65536, 0, 589850, 65536, 0, 589849, 65536, 0, 589848, 65536, 0, 589847, 65536, 0, 655382, 65536, 1, 720918, 65536, 1, 720919, 65536, 1, 720920, 65536, 1, 720921, 65536, 1, 655386, 65536, 1, 655387, 65536, 1, 655388, 65536, 1, 655389, 65536, 1, 655390, 65536, 1, 655391, 65536, 1, 655392, 65536, 1, 655383, 65536, 1, 655384, 65536, 1, 655385, 65536, 1, 720922, 65536, 1, 720923, 65536, 1, 720924, 65536, 1, 720925, 65536, 1, 720926, 65536, 1, 720927, 65536, 1, 720928, 65536, 1, 655393, 65536, 1, 720929, 65536, 1, 655394, 65536, 1, 720930, 65536, 1, 655395, 65536, 1, 720931, 65536, 1, 655396, 65536, 1, 720932, 65536, 1, 655397, 65536, 1, 720933, 65536, 1, 720934, 65536, 1, 720935, 65536, 1, 720936, 65536, 1, 720937, 65536, 1, 720938, 65536, 1, 655402, 65536, 1, 655401, 65536, 1, 655400, 65536, 1, 655399, 65536, 1, 655398, 65536, 1, 589861, 65536, 0, 589862, 65536, 0, 589863, 65536, 0, 589864, 65536, 0, 589865, 65536, 0, 589866, 65536, 0, 589867, 65536, 0, 655403, 65536, 1, 655404, 65536, 1, 720940, 65536, 1, 720941, 65536, 1, 720942, 65536, 1, 720943, 65536, 1, 655407, 65536, 1, 655406, 65536, 1, 655405, 65536, 1, 720939, 65536, 1, 589868, 65536, 0, 589869, 65536, 0, 589870, 65536, 0, 589871, 65536, 0)
 
 [node name="Menu" type="CanvasLayer" parent="."]
+layer = 16
 
 [node name="MainMenu" type="VBoxContainer" parent="Menu"]
 anchors_preset = 5
@@ -276,17 +278,20 @@ offset_top = 33.0
 offset_right = 262.0
 offset_bottom = 114.0
 grow_horizontal = 2
+mouse_filter = 2
 theme = ExtResource("9_1877w")
 theme_override_constants/separation = 20
 
 [node name="Items" type="HBoxContainer" parent="Menu/ShopMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 theme_override_constants/separation = 30
 
 [node name="Item1" type="Button" parent="Menu/ShopMenu/Items"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+disabled = true
 icon = ExtResource("10_8yw3b")
 icon_alignment = 1
 expand_icon = true
@@ -304,6 +309,22 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="Menu/ShopMenu/Items/Item1/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7up5p")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item1/Control"]
 layout_mode = 1
@@ -356,11 +377,12 @@ color = Color(0, 0, 0, 0.501961)
 
 [node name="Sprite2D" type="Sprite2D" parent="Menu/ShopMenu/Items/Item1/Control/Lock"]
 scale = Vector2(0.135, 0.135)
-texture = ExtResource("11_6kbiw")
+texture = ExtResource("12_ruv2x")
 
 [node name="Item2" type="Button" parent="Menu/ShopMenu/Items"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+disabled = true
 icon = ExtResource("10_8yw3b")
 icon_alignment = 1
 expand_icon = true
@@ -378,6 +400,22 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="Menu/ShopMenu/Items/Item2/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7up5p")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item2/Control"]
 layout_mode = 1
@@ -431,11 +469,12 @@ color = Color(0, 0, 0, 0.501961)
 
 [node name="Sprite2D" type="Sprite2D" parent="Menu/ShopMenu/Items/Item2/Control/Lock"]
 scale = Vector2(0.135, 0.135)
-texture = ExtResource("11_6kbiw")
+texture = ExtResource("12_ruv2x")
 
 [node name="Item3" type="Button" parent="Menu/ShopMenu/Items"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+disabled = true
 icon = ExtResource("10_8yw3b")
 icon_alignment = 1
 expand_icon = true
@@ -453,6 +492,22 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="Menu/ShopMenu/Items/Item3/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7up5p")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item3/Control"]
 layout_mode = 1
@@ -506,11 +561,12 @@ color = Color(0, 0, 0, 0.501961)
 
 [node name="Sprite2D" type="Sprite2D" parent="Menu/ShopMenu/Items/Item3/Control/Lock"]
 scale = Vector2(0.135, 0.135)
-texture = ExtResource("11_6kbiw")
+texture = ExtResource("12_ruv2x")
 
 [node name="Item4" type="Button" parent="Menu/ShopMenu/Items"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+disabled = true
 icon = ExtResource("10_8yw3b")
 icon_alignment = 1
 expand_icon = true
@@ -528,6 +584,22 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="Menu/ShopMenu/Items/Item4/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7up5p")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item4/Control"]
 layout_mode = 1
@@ -581,11 +653,12 @@ color = Color(0, 0, 0, 0.501961)
 
 [node name="Sprite2D" type="Sprite2D" parent="Menu/ShopMenu/Items/Item4/Control/Lock"]
 scale = Vector2(0.135, 0.135)
-texture = ExtResource("11_6kbiw")
+texture = ExtResource("12_ruv2x")
 
 [node name="Item5" type="Button" parent="Menu/ShopMenu/Items"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+disabled = true
 icon = ExtResource("10_8yw3b")
 icon_alignment = 1
 expand_icon = true
@@ -603,6 +676,22 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="Menu/ShopMenu/Items/Item5/Control"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_7up5p")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="Menu/ShopMenu/Items/Item5/Control"]
 layout_mode = 1
@@ -656,7 +745,7 @@ color = Color(0, 0, 0, 0.501961)
 
 [node name="Sprite2D" type="Sprite2D" parent="Menu/ShopMenu/Items/Item5/Control/Lock"]
 scale = Vector2(0.135, 0.135)
-texture = ExtResource("11_6kbiw")
+texture = ExtResource("12_ruv2x")
 
 [node name="Back" type="Button" parent="Menu/ShopMenu"]
 layout_mode = 2
