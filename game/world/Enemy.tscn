@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ou77wqeytf6f"]
+[gd_scene load_steps=18 format=3 uid="uid://ou77wqeytf6f"]
 
 [ext_resource type="Script" path="res://game/world/Enemy.gd" id="1_b8kms"]
 [ext_resource type="Texture2D" uid="uid://cowdwwm6v7n2s" path="res://game/world/grim_riper.png" id="2_o1e21"]
+[ext_resource type="Texture2D" uid="uid://cbk0ussfhhb86" path="res://game/world/spritesheet_grim_reaper.png" id="3_q7k4q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duk8n"]
 radius = 15.0
@@ -23,6 +24,38 @@ region = Rect2(1280, 0, 640, 960)
 atlas = ExtResource("2_o1e21")
 region = Rect2(1920, 0, 640, 960)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3gm1"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(0, 0, 832, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08udc"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(832, 0, 832, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufrmf"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(1664, 0, 832, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xftr"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(2496, 0, 832, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awlo5"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(3328, 0, 832, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7wwx"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(4160, 0, 832, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1glst"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(4992, 0, 832, 960)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6jd3"]
+atlas = ExtResource("3_q7k4q")
+region = Rect2(5824, 0, 832, 960)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1e3ax"]
 animations = [{
 "frames": [{
@@ -41,6 +74,35 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3gm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08udc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufrmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xftr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awlo5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7wwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1glst")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6jd3")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 20.0
 }]
 
 [node name="Enemy" type="Area2D"]
@@ -52,8 +114,8 @@ script = ExtResource("1_b8kms")
 shape = SubResource("CapsuleShape2D_duk8n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3, -1)
-scale = Vector2(0.064, 0.064)
+process_mode = 3
+scale = Vector2(0.0985577, 0.0985577)
 sprite_frames = SubResource("SpriteFrames_1e3ax")
 autoplay = "default"
 

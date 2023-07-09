@@ -9,7 +9,7 @@ var next_water: int = randi()%4+15
 var water_width: int = 6
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
 var next_coin: int = 20
-var next_enemy: int = 30
+var next_enemy: int = 3#0
 var block_spacing: float = 63.5
 var place_platform_size: Vector2 = Vector2(128,22)
 
@@ -52,9 +52,16 @@ func button_pressed():
 const item_distances = [30,60,90,120,150]
 const item_costs = [10,20,30,40,50]
 
+const cash_sounds = [
+	preload("res://sound/CASH REGISTER/CASH REGISTER-01.wav"),
+	preload("res://sound/CASH REGISTER/CASH REGISTER-02.wav"),
+	preload("res://sound/CASH REGISTER/CASH REGISTER.wav"),
+]
+
 func item_pressed(index: int):
 	print("pressed " + str(index))
 	if item_costs[index] <= Global.wallet:
+		Global.play_sound(cash_sounds[randi()%cash_sounds.size()])
 		Global.wallet -= item_costs[index]
 		update_stats()
 		Global.purchase_item(index)
@@ -122,14 +129,8 @@ func set_platform_placement(platform_scene):
 	platform.modulate.a = 0.5
 
 const platform_sounds = [
-	preload("res://sound/PLATFORM FX/PLATFORM FX-01.wav"),
-	preload("res://sound/PLATFORM FX/PLATFORM FX-02.wav"),
-	preload("res://sound/PLATFORM FX/PLATFORM FX-03.wav"),
-	preload("res://sound/PLATFORM FX/PLATFORM FX-04.wav"),
-	preload("res://sound/PLATFORM FX/PLATFORM FX-05.wav"),
-	preload("res://sound/PLATFORM FX/PLATFORM FX-06.wav"),
-	preload("res://sound/PLATFORM FX/PLATFORM FX-07.wav"),
-	preload("res://sound/PLATFORM FX/PLATFORM FX.wav")
+	preload("res://sound/PLATFORM FX/1.wav"),
+	preload("res://sound/PLATFORM FX/2.wav")
 ]
 
 func _process(delta):
@@ -165,7 +166,7 @@ func _process(delta):
 		platform.global_position = pos
 		platform.modulate.a = 1.0
 		platform.enable()
-		Global.play_sound(platform_sounds[randi()%platform_sounds.size()],0.0,-2.0)
+		#Global.play_sound(platform_sounds[randi()%platform_sounds.size()],0.0,-2.0)
 		set_platform_placement(platform_scene)
 	$Moving.global_position.x -= delta*speed
 	$Background.move(delta*speed)

@@ -274,6 +274,7 @@ theme_override_font_sizes/font_size = 11
 text = "RESET DATA"
 
 [node name="ShopMenu" type="VBoxContainer" parent="Menu"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
