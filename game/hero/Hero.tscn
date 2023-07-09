@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://d1onfbc3nw840" path="res://game/hero/grandpa_animation_sheet.png" id="2_0ey4v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_txxm6"]
-radius = 28.0
-height = 76.0
+radius = 16.0
+height = 60.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6gxf8"]
 atlas = ExtResource("2_0ey4v")
@@ -87,6 +87,6 @@ offset_bottom = 23.0
 text = "Score: 0"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.08, 0.08)
+scale = Vector2(0.064, 0.064)
 sprite_frames = SubResource("SpriteFrames_fk5pa")
 autoplay = "default"

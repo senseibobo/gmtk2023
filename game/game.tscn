@@ -1,12 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://v5rec5tea6rr"]
+[gd_scene load_steps=12 format=3 uid="uid://v5rec5tea6rr"]
 
 [ext_resource type="Script" path="res://game/Game.gd" id="1_dydng"]
 [ext_resource type="PackedScene" uid="uid://mcdv3twmuodh" path="res://game/hero/Hero.tscn" id="2_x7yqc"]
 [ext_resource type="Script" path="res://game/world/Game Over.gd" id="3_j3yf2"]
+[ext_resource type="Texture2D" uid="uid://bal8rgmvwwdqg" path="res://game/world/background_sky.png" id="4_7i6s6"]
+[ext_resource type="Texture2D" uid="uid://dejesmetfrxf5" path="res://game/world/background_mountain.png" id="5_lciuw"]
+[ext_resource type="Script" path="res://game/Background.gd" id="5_pia7q"]
+[ext_resource type="Texture2D" uid="uid://c1ysx1fr8jp2o" path="res://game/world/background_forest.png" id="6_lu3k5"]
+[ext_resource type="Texture2D" uid="uid://b7up8587wvm60" path="res://game/world/tileset1.png" id="7_r5xld"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rpryy"]
 a = Vector2(0.5, -0.384615)
 b = Vector2(-3.05176e-05, 18.8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tou8a"]
+texture = ExtResource("7_r5xld")
+texture_region_size = Vector2i(320, 320)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ltjw4"]
+tile_size = Vector2i(320, 320)
+terrain_set_0/mode = 0
+sources/0 = SubResource("TileSetAtlasSource_tou8a")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_dydng")
@@ -46,5 +66,47 @@ scale = Vector2(2, 65)
 shape = SubResource("SegmentShape2D_rpryy")
 
 [node name="PlatformPlacement" type="Node2D" parent="."]
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -105
+z_as_relative = false
+script = ExtResource("5_pia7q")
+
+[node name="Background" type="Sprite2D" parent="Background"]
+position = Vector2(320, 185)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_7i6s6")
+
+[node name="Mountains" type="Sprite2D" parent="Background"]
+position = Vector2(0, -88)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_lciuw")
+centered = false
+
+[node name="Sprite2D4" type="Sprite2D" parent="Background/Mountains"]
+position = Vector2(2880, 540)
+scale = Vector2(1, 1)
+texture = ExtResource("5_lciuw")
+
+[node name="Trees" type="Sprite2D" parent="Background"]
+position = Vector2(0, 120)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_lu3k5")
+centered = false
+
+[node name="Sprite2D4" type="Sprite2D" parent="Background/Trees"]
+position = Vector2(5675, 540)
+scale = Vector2(1, 1)
+texture = ExtResource("6_lu3k5")
+
+[node name="TileMap" type="TileMap" parent="Background/Trees"]
+modulate = Color(0.294118, 0.294118, 0.294118, 1)
+z_index = -60
+z_as_relative = false
+position = Vector2(0, -600)
+scale = Vector2(0.5, 0.5)
+tile_set = SubResource("TileSet_ltjw4")
+format = 2
+layer_0/tile_data = PackedInt32Array(655359, 0, 0, 589824, 65536, 0, 589825, 65536, 0, 589826, 65536, 0, 589827, 65536, 0, 589828, 65536, 0, 589829, 65536, 0, 589830, 65536, 0, 589831, 65536, 0, 589832, 65536, 0, 589833, 65536, 0, 589834, 65536, 0, 589835, 65536, 0, 589836, 65536, 0, 589837, 65536, 0, 589838, 65536, 0, 589839, 65536, 0, 589840, 65536, 0, 589841, 65536, 0, 589842, 65536, 0, 589843, 65536, 0, 589844, 65536, 0, 589845, 65536, 0, 720895, 65536, 1, 655360, 65536, 1, 655361, 65536, 1, 655362, 65536, 1, 655363, 65536, 1, 655364, 65536, 1, 655365, 65536, 1, 655366, 65536, 1, 655367, 65536, 1, 655368, 65536, 1, 655369, 65536, 1, 655370, 65536, 1, 655371, 65536, 1, 655372, 65536, 1, 655373, 65536, 1, 655374, 65536, 1, 655375, 65536, 1, 655376, 65536, 1, 655377, 65536, 1, 655378, 65536, 1, 655379, 65536, 1, 655380, 65536, 1, 655381, 65536, 1, 786431, 65536, 1, 720896, 65536, 1, 720897, 65536, 1, 720898, 65536, 1, 720899, 65536, 1, 720900, 65536, 1, 720901, 65536, 1, 720902, 65536, 1, 720903, 65536, 1, 720904, 65536, 1, 720905, 65536, 1, 720906, 65536, 1, 720907, 65536, 1, 720908, 65536, 1, 720909, 65536, 1, 720910, 65536, 1, 720911, 65536, 1, 720912, 65536, 1, 720913, 65536, 1, 720914, 65536, 1, 720915, 65536, 1, 720916, 65536, 1, 720917, 65536, 1, 589846, 65536, 0, 589860, 65536, 0, 589859, 65536, 0, 589858, 65536, 0, 589857, 65536, 0, 589856, 65536, 0, 589855, 65536, 0, 589854, 65536, 0, 589853, 65536, 0, 589852, 65536, 0, 589851, 65536, 0, 589850, 65536, 0, 589849, 65536, 0, 589848, 65536, 0, 589847, 65536, 0, 655382, 65536, 1, 720918, 65536, 1, 720919, 65536, 1, 720920, 65536, 1, 720921, 65536, 1, 655386, 65536, 1, 655387, 65536, 1, 655388, 65536, 1, 655389, 65536, 1, 655390, 65536, 1, 655391, 65536, 1, 655392, 65536, 1, 655383, 65536, 1, 655384, 65536, 1, 655385, 65536, 1, 720922, 65536, 1, 720923, 65536, 1, 720924, 65536, 1, 720925, 65536, 1, 720926, 65536, 1, 720927, 65536, 1, 720928, 65536, 1, 655393, 65536, 1, 720929, 65536, 1, 655394, 65536, 1, 720930, 65536, 1, 655395, 65536, 1, 720931, 65536, 1, 655396, 65536, 1, 720932, 65536, 1, 655397, 65536, 1, 720933, 65536, 1, 720934, 65536, 1, 720935, 65536, 1, 720936, 65536, 1, 720937, 65536, 1, 720938, 65536, 1, 655402, 65536, 1, 655401, 65536, 1, 655400, 65536, 1, 655399, 65536, 1, 655398, 65536, 1, 589861, 65536, 0, 589862, 65536, 0, 589863, 65536, 0, 589864, 65536, 0, 589865, 65536, 0, 589866, 65536, 0, 589867, 65536, 0, 655403, 65536, 1, 655404, 65536, 1, 720940, 65536, 1, 720941, 65536, 1, 720942, 65536, 1, 720943, 65536, 1, 655407, 65536, 1, 655406, 65536, 1, 655405, 65536, 1, 720939, 65536, 1, 589868, 65536, 0, 589869, 65536, 0, 589870, 65536, 0, 589871, 65536, 0)
 
 [connection signal="body_entered" from="Game Over Collision" to="Game Over Collision" method="_on_body_entered"]

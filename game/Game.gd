@@ -9,13 +9,13 @@ var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping plat
 var max_coins: int = 3
 var coins_spawned_counter: int = 0
 var next_coin: int = 10
-var block_spacing: float = 60
+var block_spacing: float = 63.5
 var place_platform_size: Vector2 = Vector2(128,22)
 
 func _ready():
 	move_step = 1600
 	set_platform_placement(preload("res://game/platforms/Platform.tscn"))
-	#Engine.time_scale = 2
+	#Engine.time_scale = 4
 
 var platform_scene
 
@@ -52,6 +52,7 @@ func _process(delta):
 		platform.enable()
 		set_platform_placement(platform_scene)
 	$Moving.global_position.x -= delta*speed
+	$Background.move(delta*speed)
 	move_step += delta*speed
 	while move_step >= block_spacing:
 		spawn_block()
@@ -62,28 +63,31 @@ func _process(delta):
 			child.queue_free()
 
 func check_platform_valid():
-	var space = get_world_2d().direct_space_state
-	var params = PhysicsShapeQueryParameters2D.new()
 	var platform = $PlatformPlacement.get_child(0)
-	var shape = platform.get_node("CollisionShape2D").shape.duplicate(true)
-	shape.extents *= 0.75
-	params.shape = shape
-	params.transform = platform.get_global_transform().scaled_local(Vector2(0.70,0.70))
-	params.collision_mask = 3
+	var space = get_world_2d().direct_space_state
+	var collision = platform.get_node_or_null("CollisionShape2D")
+	var check1 = true
+	var check2 = true
+	if collision:
+		var shape = platform.get_node("CollisionShape2D").shape.duplicate(true)
+		var params = PhysicsShapeQueryParameters2D.new()
+		shape.extents *= 0.75
+		params.shape = shape
+		params.transform = platform.get_global_transform().scaled_local(Vector2(0.70,0.70))
+		params.collision_mask = 3
+		var result = space.intersect_shape(params,1)
+		check1 = result.size() == 0
 	var ground = platform.get_node_or_null("Ground")
 	if ground:
 		var params2 = PhysicsShapeQueryParameters2D.new()
 		var shape2 = ground.shape.duplicate(true)
 		params2.shape = shape2
 		params2.transform = ground.get_global_transform()
-		params2.collision_mask = 3
+		params2.collision_mask = 1
 		var result2 = space.intersect_shape(params2,1)
 		print(result2)
-		if result2.size() == 0:
-			return false
-	var result = space.intersect_shape(params,1)
-	return result.size() == 0
-	
+		check2 = result2.size() != 0
+	return check1 and check2
 
 func spawn_block():
 	var block
