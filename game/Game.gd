@@ -8,8 +8,8 @@ var water_counter: int = 0
 var next_water: int = randi()%4+15
 var water_width: int = 6
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
-var next_coin: int = 30
-var next_enemy: int = 3#0
+var next_coin: int = 20
+var next_enemy: int = 30
 var block_spacing: float = 63.5
 var place_platform_size: Vector2 = Vector2(128,22)
 
@@ -95,14 +95,22 @@ func _process(delta):
 	var pp = $PlatformPlacement
 	pp.global_position = get_global_mouse_position()
 	pp.global_position.y = int(pp.global_position.y)/22*22+11
-	if Input.is_action_pressed("select_regular_platform"): #d
-		set_platform_placement(preload("res://game/platforms/Platform.tscn"))
-		current_platform_selected = 0
-		place_platform_size = Vector2(128,22) 
-	elif Input.is_action_pressed("select_jump_platform"): #s
-		set_platform_placement(preload("res://game/platforms/Jump Platform.tscn"))
-		current_platform_selected = 1
-		place_platform_size = Vector2(64,22)
+#   if Input.is_action_pressed("select_regular_platform"): #d
+#		set_platform_placement(preload("res://game/platforms/Platform.tscn"))
+#		current_platform_selected = 0
+#		place_platform_size = Vector2(128,22) 
+#	elif Input.is_action_pressed("select_jump_platform"): #s
+#		set_platform_placement(preload("res://game/platforms/Jump Platform.tscn"))
+#		current_platform_selected = 1
+#		place_platform_size = Vector2(64,22)
+	
+	if Input.is_action_just_pressed("select_next_platform"):
+		if current_platform_selected == 1:
+			set_platform_placement(preload("res://game/platforms/Platform.tscn"))
+			current_platform_selected = 0
+		elif current_platform_selected == 0:
+			set_platform_placement(preload("res://game/platforms/Jump Platform.tscn"))
+			current_platform_selected = 1
 	var valid = check_platform_valid()
 	$PlatformPlacement.modulate = Color(1.0,int(valid),int(valid),1.0)
 	if valid and Input.is_action_just_pressed("place_platform"):
@@ -138,15 +146,24 @@ func check_platform_valid():
 	var collision = platform.get_node_or_null("CollisionShape2D")
 	var check1 = true
 	var check2 = true
+	var check3 = true
 	if collision:
 		var shape = platform.get_node("CollisionShape2D").shape.duplicate(true)
 		var params = PhysicsShapeQueryParameters2D.new()
-		shape.extents *= 0.75
+		shape.extents *= 0.5
 		params.shape = shape
-		params.transform = platform.get_global_transform().scaled_local(Vector2(0.70,0.70))
+		params.transform = platform.get_global_transform().scaled_local(Vector2(0.01,0.70))
 		params.collision_mask = 3
 		var result = space.intersect_shape(params,1)
 		check1 = result.size() == 0
+		var shape2 = platform.get_node("CollisionShape2D").shape.duplicate(true)
+		var params2 = PhysicsShapeQueryParameters2D.new()
+		shape2.extents *= 1
+		params2.shape = shape2
+		params2.transform = platform.get_global_transform()
+		params2.collision_mask = 2
+		var result2 = space.intersect_shape(params2,1)
+		check3 = result2.size() == 0
 	var ground = platform.get_node_or_null("Ground")
 	if ground:
 		var params2 = PhysicsShapeQueryParameters2D.new()
@@ -156,7 +173,7 @@ func check_platform_valid():
 		params2.collision_mask = 1
 		var result2 = space.intersect_shape(params2,1)
 		check2 = result2.size() != 0
-	return check1 and check2
+	return check1 and check2 and check3
 
 func spawn_block():
 	var block
@@ -177,11 +194,11 @@ func spawn_block():
 	next_coin -= 1
 	if next_coin <= 0:
 		spawn_coin(1300-move_step-block_spacing/2)
-		next_coin = 6+randi()%6 # oba podeli sa 2 ako dupliras skor
+		next_coin = 5+randi()%5 # oba podeli sa 2 ako dupliras skor
 	next_enemy -= 1
 	if next_enemy <= 0:
 		spawn_enemy(1300-move_step-block_spacing/2)
-		next_enemy = 6+randi()%6 # oba podeli sa 2 ako dupliras skor
+		next_enemy = 9+randi()%9 # oba podeli sa 2 ako dupliras skor
 		
 func spawn_coin(x_position: float):
 	var coin = preload("res://game/world/coin.tscn").instantiate()
