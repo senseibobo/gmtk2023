@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03avx"]
 size = Vector2(1900, 220)
 
-[node name="Platform" type="StaticBody2D"]
+[node name="Platform" type="StaticBody2D" groups=["Wood"]]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_cdym5")
 

@@ -14,12 +14,13 @@ func _ready():
 	if FileAccess.file_exists("user://save.json"):
 		load_game()
 
-func play_sound(stream: AudioStream, from_position: float = 0.0, volume_db: float = 0.0, pitch: float = 0.0, bus: String = "Master"):
+func play_sound(stream: AudioStream, from_position: float = 0.0, volume_db: float = 0.0, pitch: float = 1.0, bus: String = "Master", pause_on_pause: bool = false):
 	var player = AudioStreamPlayer.new()
 	player.stream = stream
 	player.volume_db = volume_db
 	player.pitch_scale = pitch
 	player.bus = bus
+	player.process_mode = Node.PROCESS_MODE_INHERIT if pause_on_pause else Node.PROCESS_MODE_ALWAYS
 	add_child(player)
 	player.play()
 	player.finished.connect(player.queue_free)
@@ -43,11 +44,19 @@ func save_game():
 	file.close()
 
 
+const death_sounds = [
+	preload("res://sound/VOICE/death 1-01.wav"),
+	preload("res://sound/VOICE/death 1.wav"),
+	preload("res://sound/VOICE/death NOVO.wav")
+]
+
 func death():
+	play_sound(death_sounds[randi()%death_sounds.size()],0.0,-4.0)
 	game_over_signal.emit()
 	var gameover = preload("res://ui/gameover.tscn").instantiate()
 	get_tree().root.add_child(gameover)
 	end_game()
+	
 
 func end_game():
 	longest_distance = max(longest_distance,distance)

@@ -9,7 +9,7 @@ var next_water: int = randi()%4+15
 var water_width: int = 6
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
 var next_coin: int = 30
-var next_enemy: int = 30
+var next_enemy: int = 3#0
 var block_spacing: float = 63.5
 var place_platform_size: Vector2 = Vector2(128,22)
 
@@ -21,7 +21,41 @@ func start_game():
 	$Menu.hide()
 	$HUD.show()
 
+func get_all_buttons(node: Node):
+	var buttons = []
+	for child in node.get_children():
+		if child is Button:
+			buttons.append(child)
+		buttons.append_array(get_all_buttons(child))
+	return buttons
+
+const button_press_sounds = [
+	preload("res://sound/BEEPS/BEEPS-01.wav"),
+	preload("res://sound/BEEPS/BEEPS-02.wav"),
+	preload("res://sound/BEEPS/BEEPS-03.wav"),
+	preload("res://sound/BEEPS/BEEPS-04.wav"),
+	preload("res://sound/BEEPS/BEEPS-05.wav"),
+	preload("res://sound/BEEPS/BEEPS.wav")
+]
+
+const button_hover_sounds = [
+	preload("res://sound/CLIKS/CLIKS-01.wav"),
+	preload("res://sound/CLIKS/CLIKS-02.wav"),
+	preload("res://sound/CLIKS/CLIKS-03.wav")
+]
+
+func button_hovered():
+	Global.play_sound(button_hover_sounds[randi()%button_hover_sounds.size()])
+func button_pressed():
+	Global.play_sound(button_press_sounds[randi()%button_press_sounds.size()])
+
 func _ready():
+	
+	for button in get_all_buttons(self):
+		button.mouse_entered.connect(self.button_hovered)
+		button.pressed.connect(self.button_pressed)
+	Global.play_sound(preload("res://sound/AMBIENCE.wav"))
+	Global.play_sound(preload("res://sound/Theme.wav"))
 	$Menu/VBoxContainer/Coins.text = str(Global.wallet)
 	$Menu/VBoxContainer/MaxDistance.text = str(Global.longest_distance).pad_decimals(1) + "m"
 	if Global.restart_v:
@@ -42,6 +76,17 @@ func set_platform_placement(platform_scene):
 	$PlatformPlacement.add_child(platform)
 	platform.disable()
 	platform.modulate.a = 0.5
+
+const platform_sounds = [
+	preload("res://sound/PLATFORM FX/PLATFORM FX-01.wav"),
+	preload("res://sound/PLATFORM FX/PLATFORM FX-02.wav"),
+	preload("res://sound/PLATFORM FX/PLATFORM FX-03.wav"),
+	preload("res://sound/PLATFORM FX/PLATFORM FX-04.wav"),
+	preload("res://sound/PLATFORM FX/PLATFORM FX-05.wav"),
+	preload("res://sound/PLATFORM FX/PLATFORM FX-06.wav"),
+	preload("res://sound/PLATFORM FX/PLATFORM FX-07.wav"),
+	preload("res://sound/PLATFORM FX/PLATFORM FX.wav")
+]
 
 func _process(delta):
 	if not active: return
@@ -68,6 +113,7 @@ func _process(delta):
 		platform.global_position = pos
 		platform.modulate.a = 1.0
 		platform.enable()
+		Global.play_sound(platform_sounds[randi()%platform_sounds.size()],0.0,-2.0)
 		set_platform_placement(platform_scene)
 	$Moving.global_position.x -= delta*speed
 	$Background.move(delta*speed)
