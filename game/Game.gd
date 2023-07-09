@@ -9,7 +9,7 @@ var next_water: int = randi()%4+15
 var water_width: int = 6
 var current_platform_selected: int = 0 # 0 - regular platform | 1 - jumping platform
 var next_coin: int = 20
-var next_enemy: int = 3#0
+var next_enemy: int = 30
 var block_spacing: float = 63.5
 var place_platform_size: Vector2 = Vector2(128,22)
 
@@ -202,9 +202,9 @@ func check_platform_valid():
 		check1 = result.size() == 0
 		var shape2 = platform.get_node("CollisionShape2D").shape.duplicate(true)
 		var params2 = PhysicsShapeQueryParameters2D.new()
-		shape2.extents *= 1
+		shape2.extents *= 0.7
 		params2.shape = shape2
-		params2.transform = platform.get_global_transform()
+		params2.transform = platform.get_global_transform().scaled_local(Vector2(0.2,0.70))
 		params2.collision_mask = 2
 		var result2 = space.intersect_shape(params2,1)
 		check3 = result2.size() == 0
@@ -236,11 +236,11 @@ func spawn_block():
 	block.global_position.x = 1300-move_step
 	block.global_position.y = 286
 	next_coin -= 1
+	next_enemy -= 1
 	if next_coin <= 0:
 		spawn_coin(1300-move_step-block_spacing/2)
 		next_coin = 5+randi()%5 # oba podeli sa 2 ako dupliras skor
-	next_enemy -= 1
-	if next_enemy <= 0:
+	elif next_enemy <= 0:
 		spawn_enemy(1300-move_step-block_spacing/2)
 		next_enemy = 9+randi()%9 # oba podeli sa 2 ako dupliras skor
 		
