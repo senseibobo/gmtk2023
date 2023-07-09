@@ -47,7 +47,7 @@ func set_platform_placement(platform_scene):
 func _process(delta):
 	if not active: return
 	time += delta
-	speed = log(time)*60
+	speed = 20+log(time)*40
 	var pp = $PlatformPlacement
 	pp.global_position = get_global_mouse_position()
 	pp.global_position.y = int(pp.global_position.y)/22*22+11
@@ -132,7 +132,7 @@ func spawn_block():
 	next_coin -= 1
 	if next_coin <= 0:
 		spawn_coin(1300-move_step-block_spacing/2)
-		next_coin = 10+randi()%10 # oba podeli sa 2 ako dupliras skor
+		next_coin = 6+randi()%6 # oba podeli sa 2 ako dupliras skor
 		
 func spawn_coin(x_position: float):
 	var coin = preload("res://game/world/coin.tscn").instantiate()

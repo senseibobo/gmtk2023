@@ -4,16 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://bfhj1icvt3key" path="res://game/platforms/platforma.png" id="1_xn473"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03avx"]
-size = Vector2(1270, 370)
+size = Vector2(1900, 220)
 
 [node name="Platform" type="StaticBody2D"]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_cdym5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -12.5)
-scale = Vector2(1, 0.5)
+position = Vector2(-4.76837e-06, -7.86781e-06)
+scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_03avx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1)
 texture = ExtResource("1_xn473")
