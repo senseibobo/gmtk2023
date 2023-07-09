@@ -49,8 +49,8 @@ func button_hovered():
 func button_pressed():
 	Global.play_sound(button_press_sounds[randi()%button_press_sounds.size()])
 
-const item_distances = [30,60,90,120,150]
-const item_costs = [10,20,30,40,50]
+const item_distances = [30,45,70,100,200]
+const item_costs = [3,10,20,32,50]
 
 const cash_sounds = [
 	preload("res://sound/CASH REGISTER/CASH REGISTER-01.wav"),
