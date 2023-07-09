@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://hi57b7km05lt" path="res://game/world/coin_animation.png" id="2_swajr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h3et6"]
-radius = 5.49747
+radius = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tykbm"]
 atlas = ExtResource("2_swajr")
@@ -63,7 +63,6 @@ collision_mask = 2
 script = ExtResource("1_bp3mw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_h3et6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
